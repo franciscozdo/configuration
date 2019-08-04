@@ -57,7 +57,8 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\e[01;31m\]\u\[\e[00m\]:\[\e[01;34m\]\w\[\e[33m\]\$\[\e[00m\] '
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -120,6 +121,7 @@ fi
 alias gcc="gcc -Wall -Wextra -std=c11"
 # flagi dla gcc do kompilowania gtk
 export gtkflags="`pkg-config gtk+-3.0 --cflags --libs`"
+alias glog="git log --all --decorate --oneline --graph"
 
 # Dodaje folder do przeszukiwania podczas szukania programu do wykonania
 export PATH=/home/francisco/.local/bin/:/home/francisco/.local/bin/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -127,9 +129,9 @@ export LS_COLORS="rs=0:di=01;4;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=4
 #export PS1="${debian_chroot:+($debian_chroot)}\e[97m\u@\h:\e[34m\w\\e[31m$\e[0m "
 
 
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. /home/francisco/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
+#powerline-daemon -q
+#POWERLINE_BASH_CONTINUATION=1
+#POWERLINE_BASH_SELECT=1
+#. /home/francisco/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 
-xmodmap ~/.xmodmap
+#xmodmap ~/.xmodmap

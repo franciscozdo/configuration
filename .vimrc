@@ -11,12 +11,18 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim' "lightline
-set laststatus=2 "diplays lightline
-set noshowmode "don't show vim status
 Plug 'altercation/vim-colors-solarized' "solarized theme 
 Plug 'scrooloose/nerdtree' "NERDTree
+Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
+Plug 'lervag/vimtex'
 
 call plug#end()
+
+let g:vimtex_view_method='zathura'
+
+set laststatus=2 "diplays lightline
+set noshowmode "don't show vim status
 
 "UTF-8
 set encoding=utf-8
@@ -26,30 +32,35 @@ set encoding=utf-8
 set autoindent
 filetype indent on
 set tabstop=2 "visual spaces per TAB
-set shiftwidth=4 
+set shiftwidth=2 
 set expandtab "tabs are spaces
 set softtabstop=2 "number of spaces per tab
-
+    
 "VIEW
 
-set number "show line numbers
+set number "show line numbers (or with relativenumber)
 set cursorline "highlight current line
-set showmatch
+set showmatch "shows matching bracket
 syntax on
 
-set textwidth=80
-set linebreak "breaks line when it's too long
+"set textwidth=80
+"set linebreak "breaks line when it's too long
 
 "color sheme
 let g:lightline = {'colorscheme': 'wombat'}
+
+
 "let g:solarized_use16=1
 
 set background=dark 
-colorscheme solarized
+"colorscheme solarized
+colorscheme gruvbox
+"colorscheme wombat
+"colo mokokai
 
 "spell checking
-set spelllang=pl,en
-set spell
+"set spelllang=pl,en
+"set spell
 
 
 "SPLITTING
@@ -60,11 +71,12 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+"vsplit and split opens on rightside and on bottom 
 set splitright
 set splitbelow
 
 "FOLDING
-
+"
 set foldmethod=manual
 augroup remember_folds
     autocmd!
@@ -89,5 +101,9 @@ set autoread
 nmap <F8> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif "closing NerdTree i
 
-
-
+" to copy to clipboard
+set clipboard=unnamedplus
+"noremap <Leader>P "*y
+"noremap <Leader>Y "*p
+noremap <Leader>y "+y
+noremap <Leader>p "+p
