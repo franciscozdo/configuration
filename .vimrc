@@ -11,15 +11,16 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim' "lightline
-Plug 'altercation/vim-colors-solarized' "solarized theme 
-Plug 'scrooloose/nerdtree' "NERDTree
-Plug 'flazz/vim-colorschemes'
+"Plug 'altercation/vim-colors-solarized' "solarized theme 
+"Plug 'scrooloose/nerdtree' "NERDTree
+"Plug 'flazz/vim-colorschemes'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
-Plug 'lervag/vimtex'
+"Plug 'lervag/vimtex'
 
 call plug#end()
 
-let g:vimtex_view_method='zathura'
+"let g:vimtex_view_method='zathura'
 
 set laststatus=2 "diplays lightline
 set noshowmode "don't show vim status
@@ -47,16 +48,16 @@ syntax on
 "set linebreak "breaks line when it's too long
 
 "color sheme
-let g:lightline = {'colorscheme': 'wombat'}
 
 
 "let g:solarized_use16=1
 
 set background=dark 
-"colorscheme solarized
-colorscheme gruvbox
-"colorscheme wombat
-"colo mokokai
+"set background=light 
+colorscheme dracula
+"let g:gruvbox_contrast_dark='soft'
+"let g:gruvbox_contrast_light='hard'
+let g:lightline = {'colorscheme': 'dracula'}
 
 "spell checking
 "set spelllang=pl,en
@@ -96,14 +97,10 @@ set backupdir=~/.vim/.backup
 "auto reload file
 set autoread
 
-"settings for NERDTree
-"autocmd vimenter * NERDTree "opening NERDTree with every vim start
-nmap <F8> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif "closing NerdTree i
-
 " to copy to clipboard
 set clipboard=unnamedplus
 "noremap <Leader>P "*y
 "noremap <Leader>Y "*p
-noremap <Leader>y "+y
-noremap <Leader>p "+p
+noremap <Leader>y "*y
+noremap <Leader>p "*p"
+

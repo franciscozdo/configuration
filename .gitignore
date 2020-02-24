@@ -1,0 +1,5 @@
+.vim/plugged/*
+.vim/.swp/*
+.vim/view/*
+.vim/undo/*
+

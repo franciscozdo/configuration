@@ -117,7 +117,4 @@ alias ll="ls -al"
 alias gcc="gcc -std=c11 -Wall -Wextra"
 alias glog="git log --all --graph --oneline --decorate"
 alias vi="vim"
-function ptex(){
-    pdflatex $1;
-    pdflatex $1;
-}
+#hello
