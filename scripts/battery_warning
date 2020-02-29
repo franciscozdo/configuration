@@ -1,0 +1,32 @@
+#!/bin/bash
+command=/usr/bin/i3-nagbar
+$command -m "hello" -t error -f pango:Terminus 15&
+ln -s /home/paco/configuration/scripts/ccc /home/paco/configuration/scripts/ccc
+
+bat=$(/home/paco/configuration/scripts/battery -charge)
+state=$(/home/paco/configuration/scripts/battery -state)
+warning=80
+critic=5
+
+bat_warn=/home/paco/configuration/scripts/.bat_warn
+bat_crit=/home/paco/configuration/scripts/.bat_crit
+
+if [ "$state" == "Charging" ]; then
+  rm $bat_crit 2> /dev/null
+  rm $bat_warn 2> /dev/null
+  exit 0
+fi
+
+if [ "$bat" -le "$critic" ]; then 
+  $command -m "crit" -t error -f pango:Terminus 15&
+  ln -s $bat_crit $bat_crit 2> /dev/null
+  if [ "$?" -eq 0 ]; then
+    $command -m " Battery dropped below $critic%" -t error -f pango:Terminus 15&
+  fi
+elif [ "$bat" -le "$warning" ]; then
+  $command -m "warning" -t warning -f pango:Terminus 15&
+  ln -s $bat_warn $bat_warn 2> /dev/null
+  if [ "$?" -eq 0 ]; then 
+    $command -m " Battery dropped below $warning%" -t warning -f pango:Terminus 15&
+  fi
+fi

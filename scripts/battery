@@ -1,0 +1,66 @@
+#!/bin/bash
+# basic script to display baterry status
+# TODO add writing different icon when charge level changes
+# TODO parse arguments
+# TODO move warnign to cron
+
+state=$(acpi | cut -d' ' -f3 | rev | cut -c2- | rev)
+charge=$(acpi | cut -d' ' -f4 | rev | cut -c3- | rev)
+
+# I should have moved the warning part to the cron, but it didn't work when tried.
+warning=20
+critic=5
+
+# locks to avoid showing the same dialog twice
+bat_warn=/home/paco/configuration/scripts/.bat_warn
+bat_crit=/home/paco/configuration/scripts/.bat_crit
+
+warn () {
+
+  if [ "$charge" -le "$critic" ]; then 
+    ln -s $bat_crit $bat_crit 2> /dev/null
+    if [ "$?" -eq 0 ]; then
+      i3-nagbar -m " Battery dropped below $critic%" -t error -f pango:Terminus 15&
+    fi
+  elif [ "$charge" -le "$warning" ]; then
+    ln -s $bat_warn $bat_warn 2> /dev/null
+    if [ "$?" -eq 0 ]; then 
+      i3-nagbar -m " Battery dropped below $warning%" -t warning -f pango:Terminus 15&
+    fi
+  fi
+}
+
+if [ "$1" == "-charge" ]; then
+  echo $charge
+  exit 0
+fi
+
+if [ "$1" == "-state" ]; then 
+  echo $state
+  exit 0
+fi
+
+if [ "$1" == "-bar" ]; then
+  if [ "$state" == "Charging" ]; then
+    echo  $charge%
+  elif [ "$state" == "Discharging" ]; then
+    echo  $charge%
+  else
+    echo  Unknown
+  fi
+fi
+
+# managing 
+if [ "$state" == "Charging" ]; then
+  # remove locks only after charged over critical and warning level
+  if [ "$charge" -ge "$critic" ]; then
+    echo can remove lock c
+    rm $bat_crit 2> /dev/null
+  fi
+  if [ "$charge" -ge "$warning" ]; then
+    echo can remove lock w
+    rm $bat_warn 2> /dev/null
+  fi
+elif [ "$state" == "Discharging" ]; then
+  warn
+fi

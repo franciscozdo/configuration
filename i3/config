@@ -136,21 +136,24 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec ~/configuration/scripts/volume -i #increase sound volume
+bindsym XF86AudioLowerVolume exec ~/configuration/scripts/volume -d #decrease sound volume
+bindsym XF86AudioMute exec ~/configuration/scripts/volume -m # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec ~/configuration/scripts/brightness -i 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec ~/configuration/scripts/brightness -d 5 # decrease screen brightness
 
 # window settings
 title_align center
 default_border pixel 1px
 hide_edge_borders smart
 
+assign [class="google-chrome"] 3
+
 exec --no-startup-id xautolock -locker 'i3lock -d -c 00965B'
 exec --no-startup-id feh --bg-fill ~/configuration/wallpapers/3.jpg
+exec --no-startup-id xmodmap ~/configuration/.Xmodmap
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
@@ -162,7 +165,7 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 bar {
     #status_command  i3status
-    font pango:Terminus 11
+    font pango:Terminus 12
     output eDP1
     colors {
       background #282A36
@@ -181,8 +184,9 @@ bar {
       #urgent_workspace   #ffffff #BF616A #000000
       #binding_mode       #ffffff #BF616A #000000
     }
-    status_command ~/staff/bumblebee-status/bumblebee-status \
-    -m brightness pasink nic battery time date\
-    -p nic.format="{ssid}" nic.states="^down"\
-    -t dracula-powerline
+    #status_command ~/staff/bumblebee-status/bumblebee-status \
+    #-m brightness pasink nic battery time date\
+    #-p nic.format="{ssid}" nic.states="^down"\
+    #-t dracula-powerline
+    status_command i3blocks -c ~/configuration/i3blocks/config
 }

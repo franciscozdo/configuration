@@ -53,11 +53,10 @@ syntax on
 "let g:solarized_use16=1
 
 set background=dark 
-"set background=light 
 colorscheme dracula
-"let g:gruvbox_contrast_dark='soft'
-"let g:gruvbox_contrast_light='hard'
 let g:lightline = {'colorscheme': 'dracula'}
+
+set colorcolumn=80
 
 "spell checking
 "set spelllang=pl,en
@@ -71,6 +70,11 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+"open in new tab and move between
+map <C-T> :tabedit 
+map <C-N> :tabp<cr>
+map <C-P> :tabn<cr>
 
 "vsplit and split opens on rightside and on bottom 
 set splitright
@@ -87,13 +91,13 @@ augroup END
 
 "HISTORY, LOADING FILE, ETC.
 
-"you can undo between different saves of file
-set undofile
-set history=1000
 "directories for swap files, etc
 set undodir=~/.vim/.undo
 set directory=~/.vim/.swp
 set backupdir=~/.vim/.backup
+"you can undo between different saves of file
+set undofile
+set history=1000
 "auto reload file
 set autoread
 
@@ -101,6 +105,7 @@ set autoread
 set clipboard=unnamedplus
 "noremap <Leader>P "*y
 "noremap <Leader>Y "*p
-noremap <Leader>y "*y
-noremap <Leader>p "*p"
+noremap <Leader>y "+y
+noremap <Leader>p "+p
 
+set mouse=a

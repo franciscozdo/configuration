@@ -1,0 +1,17 @@
+#!/bin/bash
+# script to manage brightness
+# functions:
+# -i <amount> -- increase brightness
+# -d <amount> -- decrease brightness
+# -g          -- show brightness level
+
+if [ "$1" == "-i" ]; then 
+  xbacklight -inc $2
+  pkill -RTMIN+1 i3blocks
+elif [ "$1" == "-d" ]; then
+  xbacklight -dec $2
+  pkill -RTMIN+1 i3blocks
+elif [ "$1" == "-g" ]; then
+  b=$(xbacklight -get | cut -d'.' -f1)
+  echo $b%
+fi

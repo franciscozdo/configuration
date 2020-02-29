@@ -1,0 +1,8 @@
+kitty # terminal
+vim-gtk # to copy-paste outside vim
+feh # wallpaper for i3
+xbacklight 
+i3blocks # i3 status command
+locales-all # I had some problem with locales without it
+ocular # pdf viewer
+curl

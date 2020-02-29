@@ -1,0 +1,25 @@
+#!/bin/bash
+#婢墳
+if [ "$1" == "-i" ]; then 
+  l=$(pactl list sinks | grep Volume | cut -d'/' -f2 | head -n1 | cut -c2- | rev | cut -c2- | rev)
+  if [ "$l" == "100%" ]; then
+    echo no
+    exit 0
+  fi
+  pactl set-sink-volume 0 +5%
+  pkill -RTMIN+2 i3blocks
+elif [ "$1" == "-d" ]; then
+  pactl set-sink-volume 0 -5%
+  pkill -RTMIN+2 i3blocks
+elif [ "$1" == "-m" ]; then
+  pactl set-sink-mute 0 toggle
+  pkill -RTMIN+2 i3blocks
+elif [ "$1" == "-g" ]; then
+  m=$(pactl list sinks | grep Mute | cut -d' ' -f2)
+  vol=$(pactl list sinks | grep Volume | cut -d'/' -f2 | head -n1 | cut -c2- | rev | cut -c2- | rev)
+  if [ "$m" == "yes" ]; then
+    echo 婢
+    exit 0
+  fi
+  echo 墳 $vol 
+fi

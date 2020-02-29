@@ -1,0 +1,12 @@
+#!/bin/bash
+
+state1=$(nmcli device show | grep GENERAL.STATE | cut -d'(' -f2 | head -n1)
+state2=$(nmcli device show | grep GENERAL.STATE | cut -d'(' -f2 | head -n2 | tail -n1)
+
+if [ "$state1" == "connected)" ]; then
+  ssid=$(nmcli device show | grep GENERAL.CONNECTION | cut -d$' ' -f22- | head -n1)
+  echo "直 $ssid"
+  exit 0
+fi
+
+echo 睊
