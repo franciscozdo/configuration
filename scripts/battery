@@ -1,7 +1,7 @@
 #!/bin/bash
 # basic script to display baterry status
 # TODO add writing different icon when charge level changes
-# TODO parse arguments
+# TODO parse arguments with getopt
 # TODO move warnign to cron
 
 state=$(acpi | cut -d' ' -f3 | rev | cut -c2- | rev)
@@ -30,6 +30,21 @@ warn () {
   fi
 }
 
+# managing 
+if [ "$state" == "Charging" ]; then
+  # remove locks only after charged over critical and warning level
+  if [ "$charge" -ge "$critic" ]; then
+    #echo can remove lock c
+    rm $bat_crit 2> /dev/null
+  fi
+  if [ "$charge" -ge "$warning" ]; then
+    #echo can remove lock w
+    rm $bat_warn 2> /dev/null
+  fi
+elif [ "$state" == "Discharging" ]; then
+  warn
+fi
+
 if [ "$1" == "-charge" ]; then
   echo $charge
   exit 0
@@ -50,17 +65,3 @@ if [ "$1" == "-bar" ]; then
   fi
 fi
 
-# managing 
-if [ "$state" == "Charging" ]; then
-  # remove locks only after charged over critical and warning level
-  if [ "$charge" -ge "$critic" ]; then
-    echo can remove lock c
-    rm $bat_crit 2> /dev/null
-  fi
-  if [ "$charge" -ge "$warning" ]; then
-    echo can remove lock w
-    rm $bat_warn 2> /dev/null
-  fi
-elif [ "$state" == "Discharging" ]; then
-  warn
-fi

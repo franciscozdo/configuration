@@ -1,4 +1,4 @@
-separator_block_width=20
+separator_block_width=25
 markup=none
 
 [backlight]
@@ -27,6 +27,6 @@ command=date '+%Y-%m-%d'
 interval=5
 
 [time]
-command=date +%T
+command=echo "`date +%T`  "
 interval=5
 

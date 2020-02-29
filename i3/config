@@ -177,16 +177,7 @@ bar {
       inactive_workspace #282A36 #282A36 #BFBFBF
       urgent_workspace   #FF5555 #FF5555 #F8F8F2
       binding_mode       #FF5555 #FF5555 #F8F8F2
-      #background #2F343A
-      #focused_workspace  #ffffff #A3BE8C #000000
-      #active_workspace   #ffffff #81A1C1 #000000
-      #inactive_workspace #ffffff #81A1C1 #000000
-      #urgent_workspace   #ffffff #BF616A #000000
-      #binding_mode       #ffffff #BF616A #000000
     }
-    #status_command ~/staff/bumblebee-status/bumblebee-status \
-    #-m brightness pasink nic battery time date\
-    #-p nic.format="{ssid}" nic.states="^down"\
-    #-t dracula-powerline
+    separator_symbol ""
     status_command i3blocks -c ~/configuration/i3blocks/config
 }
