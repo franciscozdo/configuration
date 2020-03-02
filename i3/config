@@ -149,10 +149,10 @@ title_align center
 default_border pixel 1px
 hide_edge_borders smart
 
-assign [class="google-chrome"] 3
 
 exec --no-startup-id xautolock -locker 'i3lock -d -c 00965B'
 exec --no-startup-id feh --bg-fill ~/configuration/wallpapers/3.jpg
+# swap Esc with CapsLock
 exec --no-startup-id xmodmap ~/configuration/.Xmodmap
 
 # class                 border  bground text    indicator child_border
@@ -161,8 +161,12 @@ client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-
 client.background       #F8F8F2
+
+
+assign [class="Google-chrome" instance="google-chrome"] → $ws3
+assign [class="spotify" instance="Spotify"] → $ws4
+
 bar {
     #status_command  i3status
     font pango:Terminus 12
