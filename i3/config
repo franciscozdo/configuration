@@ -1,5 +1,5 @@
 set $mod Mod4
-font pango:Terminus 8
+font pango:Roboto 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -11,7 +11,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'Terminus-10' -p 'dmenu'"
+bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'Roboto-13' -p 'dmenu'"
 #bindsym $mod+d exec dmenu_run
 
 # change focus
@@ -116,10 +116,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -144,16 +144,23 @@ bindsym XF86AudioMute exec ~/configuration/scripts/volume -m # mute sound
 bindsym XF86MonBrightnessUp exec ~/configuration/scripts/brightness -i 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec ~/configuration/scripts/brightness -d 5 # decrease screen brightness
 
+# Screenshot
+bindsym Print exec import -window root ~/Screenshots/`date '+%Y%m%d_%H%M%S'`.png
+
 # window settings
 title_align center
 default_border pixel 1px
 hide_edge_borders smart
 
 
-exec --no-startup-id xautolock -locker 'i3lock -d -c 00965B'
-exec --no-startup-id feh --bg-fill ~/configuration/wallpapers/3.jpg
+#exec --no-startup-id xautolock -locker 'i3lock -d -c 00965B'
+exec --no-startup-id feh --bg-fill ~/configuration/wallpapers/4.png
+#set bell off
+exec --no-startup-id xset b off
+# open todolist
+exec --no-startup-id google-chrome -app=https://docs.google.com/spreadsheets/d/1kKi8nssAHY4DmRjDRs0dAzovBf3hk4gNSE2_9u8p2AQ/edit#gid=0
 # swap Esc with CapsLock
-exec --no-startup-id xmodmap ~/configuration/.Xmodmap
+#exec --no-startup-id xmodmap /home/paco/configuration/.Xmodmap
 
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
@@ -165,11 +172,10 @@ client.background       #F8F8F2
 
 
 assign [class="Google-chrome" instance="google-chrome"] → $ws3
-assign [class="spotify" instance="Spotify"] → $ws4
 
 bar {
     #status_command  i3status
-    font pango:Terminus 12
+    font pango:Roboto 13
     output eDP1
     colors {
       background #282A36
@@ -182,6 +188,6 @@ bar {
       urgent_workspace   #FF5555 #FF5555 #F8F8F2
       binding_mode       #FF5555 #FF5555 #F8F8F2
     }
-    separator_symbol ""
+    separator_symbol "("
     status_command i3blocks -c ~/configuration/i3blocks/config
 }

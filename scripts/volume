@@ -2,10 +2,11 @@
 #婢墳
 if [ "$1" == "-i" ]; then 
   l=$(pactl list sinks | grep Volume | cut -d'/' -f2 | head -n1 | cut -c2- | rev | cut -c2- | rev)
-  if [ "$l" == "100%" ]; then
-    echo no
-    exit 0
-  fi
+  # This was not good.
+  #if [ "$l" == "100%" ]; then
+  #  echo no
+  #  exit 0
+  #fi
   pactl set-sink-volume 0 +5%
   pkill -RTMIN+2 i3blocks
 elif [ "$1" == "-d" ]; then

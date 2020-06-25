@@ -114,16 +114,11 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 alias bashconfig="vim ~/.bashrc; . ~/.bashrc"
-alias ll="ls -alh"
 alias gcc="gcc -std=c11 -Wall -Wextra"
+alias ll="ls -alh"
 alias glog="git log --all --graph --oneline --decorate"
 alias vi="vim"
-alias poweroff="systemctl poweroff"
+#alias poweroff="systemctl poweroff"
 alias reboot="systemctl reboot"
 alias cls="clear"
 
-# Opening new terminal in the same CWD (Ctrl + Shift + T)
-if [[ $TERM == xterm-termite ]]; then
-  . /etc/profile.d/vte-2.91.sh
-  __vte_osc7
-fi

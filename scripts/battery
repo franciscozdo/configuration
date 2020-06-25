@@ -14,20 +14,26 @@ critic=5
 # locks to avoid showing the same dialog twice
 bat_warn=/home/paco/configuration/scripts/.bat_warn
 bat_crit=/home/paco/configuration/scripts/.bat_crit
+bat_full=/home/paco/configuration/scripts/.bat_full
+
 
 warn () {
 
   if [ "$charge" -le "$critic" ]; then 
+    # aquire lock
     ln -s $bat_crit $bat_crit 2> /dev/null
+    # if was not locked show notification
     if [ "$?" -eq 0 ]; then
       nohup i3-nagbar -m " Battery dropped below $critic%" -t error \
-        -f pango:Terminus 15 2> /dev/null > /dev/null &
+        -f pango:Roboto 15 2> /dev/null > /dev/null &
     fi
   elif [ "$charge" -le "$warning" ]; then
+    # aquire lock
     ln -s $bat_warn $bat_warn 2> /dev/null
+    # if was not locked show notification
     if [ "$?" -eq 0 ]; then 
       nohup i3-nagbar -m " Battery dropped below $warning%" -t warning \
-        -f pango:Terminus 15 2> /dev/null > /dev/null &
+        -f pango:Roboto 15 2> /dev/null > /dev/null &
     fi
   fi
 }
@@ -43,7 +49,17 @@ if [ "$state" == "Charging" ]; then
     #echo can remove lock w
     rm $bat_warn 2> /dev/null
   fi
+  if [ "$charge" -ge 99 ]; then
+    ln -s $bat_full $bat_full 2> /dev/null
+    if [ "$?" -eq 0 ]; then 
+      nohup i3-nagbar -m " Battery is full :)"  -t warning \
+        -f pango:Roboto 15 2> /dev/null > /dev/null &
+    fi
+  fi
 elif [ "$state" == "Discharging" ]; then
+  if [ "$charge" -le 99 ]; then
+    rm $bat_full 2> /dev/null
+  fi
   warn
 fi
 
@@ -59,11 +75,13 @@ fi
 
 if [ "$1" == "-bar" ]; then
   if [ "$state" == "Charging" ]; then
-    echo  $charge%
+    echo  $charge%
   elif [ "$state" == "Discharging" ]; then
     echo  $charge%
+  elif [ "$state" == "Full" ]; then
+    echo  FULL
   else
-    echo  Unknown
+    echo  Unknown
   fi
 fi
 
