@@ -116,7 +116,7 @@ fi
 alias bashconfig="vim ~/.bashrc; . ~/.bashrc"
 alias gcc="gcc -std=c11 -Wall -Wextra"
 alias ll="ls -alh"
-alias glog="git log --all --graph --oneline --decorate"
+alias glog="git log --all --graph --decorate"
 alias vi="vim"
 #alias poweroff="systemctl poweroff"
 alias reboot="systemctl reboot"

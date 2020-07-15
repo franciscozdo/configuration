@@ -7,7 +7,7 @@ source $ZSH/oh-my-zsh.sh
 alias bashconfig="vim ~/.bashrc; . ~/.bashrc"
 alias gcc="gcc -std=c11 -Wall -Wextra"
 alias ll="ls -alh"
-alias glog="git log --all --graph --oneline --decorate"
+alias glog="git log --all --graph --decorate"
 alias gits="git status"
 alias vi="vim"
 alias poweroff="systemctl poweroff"
