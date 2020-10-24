@@ -175,6 +175,7 @@ assign [class="Google-chrome" instance="google-chrome"] → $ws3
 
 bar {
     #status_command  i3status
+    position top
     font pango:Roboto 13
     output eDP1
     colors {

@@ -17,3 +17,11 @@ alias cls="clear"
 export GOBIN=/home/paco/go/bin
 export PATH=$PATH:/usr/local/go/bin:/home/paco/go/bin
 
+# env for OCaml
+eval $(opam env)
+
+function tmux-new() {
+  tmux new-session -s $1 -c ~/Studia/II/$1 -n run -d
+  tmux new-window -t $1 -c ~/Studia/II/$1 -n code
+  tmux attach -t $1
+}
