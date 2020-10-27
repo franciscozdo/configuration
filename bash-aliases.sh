@@ -1,0 +1,10 @@
+# Alias definitions.
+alias bashconfig="vim ~/.bashrc; . ~/.bashrc"
+alias ll="ls -alh"
+alias glog="git log --all --graph --decorate --oneline"
+alias gitl="git log --all --graph --decorate"
+alias gits="git status"
+alias vi="vim"
+alias poweroff="systemctl poweroff"
+alias reboot="systemctl reboot"
+alias cls="clear"
