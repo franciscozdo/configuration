@@ -8,11 +8,8 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# add git to prompt
-source ~/configuration/bash-git.sh
-
-MYPROMPT='\[\033[01;32m\]\u\[\033[00m\] \[\033[01;34m\]\w ${GIT_HEAD_PROMPT}\n\[\033[00m\]\$ '
-PS1=$MYPROMPT
+# custom prompt
+source ~/configuration/bash-prompt.sh
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
