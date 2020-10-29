@@ -1,7 +1,19 @@
 # Functions defifnitions
 
-function tmux-new() {
-  tmux new-session -s $1 -c ~/Studia/II/$1 -n run -d
-  tmux new-window -t $1 -c ~/Studia/II/$1 -n code
-  tmux attach -t $1
+function studia() {
+  if [ "$1" = "" ] || [ "$2" = "" ]; then
+    echo Podaj kierunek oraz przedmiot.;
+    return 1
+  fi
+
+  name=$1/$2
+
+  tmux has-session -t $name
+  if [ "$?" -eq "0" ]; then 
+    tmux attach -t $name
+  else
+    tmux new-session -s $name -c ~/Studia/$1/$2 -n run -d
+    tmux new-window -t $name -c ~/Studia/$1/$2 -n code
+    tmux attach -t $name
+  fi
 }

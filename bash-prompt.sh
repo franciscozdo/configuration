@@ -24,9 +24,10 @@ color_lcyan=$(echo -en '\033[01;36m')
 color_white=$(echo -en '\033[01;37m')
 
 USER_P="$color_green\u$color_reset"
-DIR_P="$color_blue\w$color_reset"
+DIR_P="$color_lyellow\w$color_reset"
 GIT_P=""
-PROMPT_P="\$"
+PROMPT_SYMBOL=">"
+PROMPT_P=$PROMPT_SYMBOL
 
 make_git() {
   local sha1
@@ -40,9 +41,9 @@ make_git() {
       color_ref=$color_red
       dirty='*'
     fi
-    GIT_P="$color_symref($(git symbolic-ref --quiet --short HEAD)$dirty)$color_reset"
+    GIT_P=" $color_symref($(git symbolic-ref --quiet --short HEAD)$dirty)$color_reset"
     if [ $? -ne 0 ]; then
-      GIT_P="$color_ref[$sha1$dirty]$color_reset"
+      GIT_P=" $color_ref[$sha1$dirty]$color_reset"
     fi
   else
     GIT_P=""
@@ -51,17 +52,17 @@ make_git() {
 
 make_status () {
   if [ "$1" -eq "0" ]; then
-    PROMPT_P="\$"
+    PROMPT_P=$PROMPT_SYMBOL
   else
-    PROMPT_P="$color_red\$$color_reset"
+    PROMPT_P="$color_red$PROMPT_SYMBOL$color_reset"
   fi
 }
 
 make_prompt () {
   make_status $?
   make_git
-  PS1="$USER_P $DIR_P $GIT_P\n$PROMPT_P "
+  #PS1="$USER_P $DIR_P $GIT_P\n$PROMPT_P "
+  PS1="$DIR_P$GIT_P $PROMPT_P "
 }
 
 PROMPT_COMMAND=make_prompt
-PS1="$USER_P $DIR_P $GIT_P\n$PROMPT_P "
