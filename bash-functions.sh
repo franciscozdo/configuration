@@ -7,6 +7,10 @@ function studia() {
   fi
 
   name=$1/$2
+  dir=~/Studia/$name
+  if [ ! -d $dir ]; then
+    mkdir -p $dir
+  fi
 
   tmux has-session -t $name
   if [ "$?" -eq "0" ]; then 
