@@ -43,9 +43,6 @@ if [ -f ~/.bash-functions ]; then
   source ~/.bash-functions
 fi
 
-# to use OCaml utop interpreter
-eval $(opam env)
-
 # for colored manpages
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
