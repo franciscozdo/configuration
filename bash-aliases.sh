@@ -1,9 +1,10 @@
 # Alias definitions.
 alias bashconfig="vim ~/.bashrc; . ~/.bashrc"
 alias ll="ls -alh"
-alias gitl="git log --all --graph --decorate --oneline"
 alias glog="git log --all --graph --decorate"
+alias gitl="git log --all --graph --decorate --oneline"
 alias gits="git status"
+alias gitd="git diff ."
 alias vi="vim"
 alias poweroff="systemctl poweroff"
 alias reboot="systemctl reboot"
