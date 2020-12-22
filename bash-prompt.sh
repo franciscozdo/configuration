@@ -58,11 +58,20 @@ make_status () {
   fi
 }
 
+make_host () {
+  if [ "$HOSTNAME" == "thinkpad" ];then
+    HOST_P=""
+  else
+    HOST_P="$color_magenta[$HOSTNAME:$USERNAME]$color_reset "
+  fi
+}
+
 make_prompt () {
   make_status $?
   make_git
+  make_host
   #PS1="$USER_P $DIR_P $GIT_P\n$PROMPT_P "
-  PS1="$DIR_P$GIT_P $PROMPT_P "
+  PS1="$HOST_P$DIR_P$GIT_P $PROMPT_P "
 }
 
 PROMPT_COMMAND=make_prompt
